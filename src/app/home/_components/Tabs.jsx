@@ -12,19 +12,19 @@ export default function Tabs() {
       <Link href="?filter=all"
         role="tab"
         aria-selected={currentFilter === 'all'}
-        className={`flex-1 sm:flex-none text-center px-2 py-2 md:px-6 rounded-lg transition-all text-sm font-medium ${currentFilter === 'all' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' : 'text-slate-300 hover:text-slate-100 hover:bg-slate-700'}`}>
+        className={`flex-1 sm:flex-none text-center px-2 py-3 md:px-6 rounded-lg transition-all text-sm font-medium ${currentFilter === 'all' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' : 'text-slate-300 hover:text-slate-100 hover:bg-slate-700'}`}>
         الكل
       </Link>
       <Link href="?filter=completed"
         role="tab"
         aria-selected={currentFilter === 'completed'}
-        className={`flex-1 sm:flex-none text-center px-2 py-2 md:px-6 rounded-lg transition-all text-sm font-medium ${currentFilter === 'completed' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' : 'text-slate-300 hover:text-slate-100 hover:bg-slate-700'}`}>
+        className={`flex-1 sm:flex-none text-center px-2 py-3 md:px-6 rounded-lg transition-all text-sm font-medium ${currentFilter === 'completed' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' : 'text-slate-300 hover:text-slate-100 hover:bg-slate-700'}`}>
         المكتملة
       </Link>
       <Link href="?filter=uncompleted"
         role="tab"
         aria-selected={currentFilter === 'uncompleted'}
-        className={`flex-1 sm:flex-none text-center px-2 py-2 md:px-6 rounded-lg transition-all text-sm font-medium ${currentFilter === 'uncompleted' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' : 'text-slate-300 hover:text-slate-100 hover:bg-slate-700'}`}>
+        className={`flex-1 sm:flex-none text-center px-2 py-3 md:px-6 rounded-lg transition-all text-sm font-medium ${currentFilter === 'uncompleted' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' : 'text-slate-300 hover:text-slate-100 hover:bg-slate-700'}`}>
         غير المكتملة
       </Link>
     </div>

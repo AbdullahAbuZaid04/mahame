@@ -7,13 +7,13 @@ export default async function Header() {
       <div className="flex flex-col min-w-0">
         <div className='flex items-center gap-1 min-w-0'>
           <h1 className="font-bold text-lg truncate">
-            مرحبًا بك: <span className="text-blue-400">{user?.user_metadata?.display_name || "مستخدم"}</span> 👋
+            مرحبًا بك: <span className="text-blue-300">{user?.user_metadata?.display_name || "مستخدم"}</span> 👋
           </h1>
         </div>
-        <p className="text-slate-400 text-xs my-1 truncate">البريد المسجل حاليًا: {user?.email}</p>
+        <p className="text-slate-200 text-xs my-1 truncate">البريد المسجل حاليًا: {user?.email}</p>
       </div>
       <form action={signOut} className="shrink-0 w-full sm:w-auto">
-        <button type="submit" className="w-full sm:w-auto bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white px-4 py-2 rounded-xl transition-all duration-200 border border-red-500/20 active:scale-95 text-sm font-medium">
+        <button type="submit" className="w-full sm:w-auto bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white px-4 py-2 rounded-xl transition-all duration-200 border border-red-500/20 active:scale-95 text-sm font-medium">
           تسجيل الخروج
         </button>
       </form>

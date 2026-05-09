@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { addTask } from "../actions";
 import { toast } from "sonner";
 
@@ -49,7 +49,7 @@ export default function AddTaskForm({ addOptimistic }) {
           name="title" type="text" required
           placeholder="ما الذي تنوي إنجازه اليوم؟"
           aria-label="عنوان المهمة الجديدة"
-          className="bg-transparent border-none outline-none flex-1 px-3 py-2 sm:py-0 text-slate-100 placeholder:text-slate-500"
+          className="bg-transparent border-none outline-none flex-1 px-3 py-2 sm:py-0 text-slate-100 placeholder:text-slate-300"
         />
         <button type="submit" className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 sm:py-2 rounded-xl font-bold transition-all active:scale-95 shadow-lg shadow-blue-900/20">
           إضافة
