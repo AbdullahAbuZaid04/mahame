@@ -36,7 +36,6 @@ export async function getAllTasks() {
   const { data, error } = await supabase
     .from('tasks').select('*').eq('user_id', userId)
     .order('is_completed', { ascending: true })
-    .order('created_at', { ascending: false })
 
   if (error) {
     console.error('Error fetching tasks:', error.message)
@@ -112,7 +111,7 @@ export async function toggleTaskStatus(previousState, formData) {
     if (error) throw new Error(error.message)
 
     revalidatePath('/')
-    return { success: true, message: !currentStatus ? 'تم إكمال المهمة بنجاح' : 'تم إلغاء إكمال المهمة بنجاح' }
+    return { success: true, message: !currentStatus ? 'تم إكمال المهمة' : 'تمت إعادة تعيين المهمة' }
   } catch (e) {
     return { success: false, message: e.message || 'حدث خطأ ما' }
   }

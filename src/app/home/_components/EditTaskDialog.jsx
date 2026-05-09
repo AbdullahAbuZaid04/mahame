@@ -1,5 +1,7 @@
 'use client'
 
+import { useActionState, useEffect } from "react";
+
 import { updateTask } from "../actions";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
@@ -10,9 +12,12 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { PenLine } from "lucide-react";
 
 export default function EditTaskDialog({ task, addOptimistic }) {
+  const [state, formAction] = useActionState(updateTask, null)
 
-
-
+  useEffect(() => {
+    if (state?.success) toast.success(state.message, { id: `edit-${task.id}` });
+    else if (state?.success === false) toast.error(state.message, { id: `edit-${task.id}` });
+  }, [state, task.id]);
 
   async function handleSubmit(formData) {
     addOptimistic({
@@ -22,23 +27,13 @@ export default function EditTaskDialog({ task, addOptimistic }) {
         title: formData.get('title')
       }
     })
-    
-    try {
-      const result = await updateTask(null, formData)
-      if (result?.success) {
-        toast.success(result.message);
-      } else {
-        toast.error(result?.message || "حدث خطأ أثناء التعديل");
-      }
-    } catch (e) {
-      toast.error("فشل الاتصال بالسيرفر");
-    }
+    formAction(formData)
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button title="تعديل المهمة" aria-label="تعديل المهمة" className="p-3 rounded-lg transition-all active:scale-90 hover:bg-blue-500/10">
+        <button title="تعديل المهمة" className="p-2 rounded-lg transition-all active:scale-90 hover:bg-blue-500/10">
           <PenLine size={20} className='text-blue-500' />
         </button>
       </DialogTrigger>
@@ -46,7 +41,7 @@ export default function EditTaskDialog({ task, addOptimistic }) {
         <form action={handleSubmit}>
           <DialogHeader>
             <DialogTitle className="text-right text-slate-100">تعديل المهمة</DialogTitle>
-            <DialogDescription className="text-right text-slate-300">قم بتعديل المهمة هنا. انقر على حفظ عند الانتهاء.</DialogDescription>
+            <DialogDescription className="text-right text-slate-400">قم بتعديل المهمة هنا. انقر على حفظ عند الانتهاء.</DialogDescription>
           </DialogHeader>
           <FieldGroup>
             <Field>

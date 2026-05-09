@@ -12,7 +12,6 @@ export const metadata = {
   description: "نظم حياتك وأنجز مهامك اليومية بسهولة مع منصة مهامي. تطبيق بسيط، سريع، وفعال لإدارة المهام الشخصية والعملية.",
   keywords: ["مدير مهام", "تنظيم الوقت", "مهامي", "تطبيق انتاجية", "Next.js", "Supabase"],
   authors: [{ name: "تطوير منصة مهامي" }],
-  themeColor: "#1e293b",
 };
 
 export const viewport = {
@@ -22,7 +21,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html dir="rtl" lang="ar" data-scroll-behavior="smooth" className={`${cairo.variable} h-full antialiased`}>
+    <html dir="rtl" lang="ar" className={`${cairo.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Toaster position="top-left" richColors />
         {children}
