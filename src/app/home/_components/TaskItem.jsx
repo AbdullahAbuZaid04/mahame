@@ -12,47 +12,53 @@ import { toast } from "sonner";
 import EditTaskDialog from "./EditTaskDialog";
 
 export default function TaskItem({ task, addOptimistic }) {
-  const [stateToggle, formActionToggle] = useActionState(toggleTaskStatus, null)
 
-  useEffect(() => {
-    if (stateToggle?.success) toast.success(stateToggle.message, { id: `toggle-${task.id}` });
-    else if (stateToggle?.success === false) toast.error(stateToggle.message, { id: `toggle-${task.id}` });
-  }, [stateToggle, task.id]);
+
+
 
   async function handleToggle(formData) {
-    addOptimistic({
-      type: 'toggle',
-      task: {
-        id: task.id,
-        is_completed: !task.is_completed,
-        completed_at: !task.is_completed ? new Date().toISOString() : null
-      }
+    startTransition(() => {
+      addOptimistic({
+        type: 'toggle',
+        task: {
+          id: task.id,
+          is_completed: !task.is_completed,
+          completed_at: !task.is_completed ? new Date().toISOString() : null
+        }
+      })
     })
-    formActionToggle(formData)
+
+    try {
+      const result = await toggleTaskStatus(null, formData)
+      if (result?.success) {
+        toast.success(result.message);
+      } else {
+        toast.error(result?.message || "حدث خطأ ما");
+      }
+    } catch (e) {
+      toast.error("فشل الاتصال بالسيرفر");
+    }
   }
 
   async function handleDelete() {
-    const toastId = `delete-${task.id}`;
-    toast.loading("جاري حذف المهمة...", { id: toastId });
-
-    startTransition(async () => {
+    startTransition(() => {
       addOptimistic({ type: 'delete', task: { id: task.id } })
-
-      try {
-        const formData = new FormData()
-        formData.append('id', task.id)
-
-        const result = await deleteTask(null, formData)
-
-        if (result?.success) {
-          toast.success(result.message, { id: toastId });
-        } else {
-          toast.error(result?.message || "حدث خطأ أثناء الحذف", { id: toastId });
-        }
-      } catch (error) {
-        toast.error("فشل الاتصال بالسيرفر", { id: toastId });
-      }
     })
+
+    try {
+      const formData = new FormData()
+      formData.append('id', task.id)
+      
+      const result = await deleteTask(null, formData)
+
+      if (result?.success) {
+        toast.success(result.message);
+      } else {
+        toast.error(result?.message || "حدث خطأ أثناء الحذف");
+      }
+    } catch (error) {
+      toast.error("فشل الاتصال بالسيرفر");
+    }
   }
 
   return (
@@ -65,7 +71,7 @@ export default function TaskItem({ task, addOptimistic }) {
               {task.title}
             </span>
           </div>
-          <p className='text-[10px] text-slate-400 font-mono truncate flex flex-col'>
+          <p className='text-[10px] text-slate-300 font-mono truncate flex flex-col'>
             حالة المهمة: {task.is_completed ? "مكتملة" : "غير مكتملة"}
             {task.is_completed && <span>تاريخ الإنجاز : {task.completed_at?.split('T')[0]}</span>}
           </p>

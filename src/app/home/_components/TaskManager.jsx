@@ -10,7 +10,7 @@ export default function TaskManager({ tasks, filter }) {
     (state, { type, task }) => {
       switch (type) {
         case 'add':
-          return [...state, task];
+          return [task, ...state];
         case 'toggle':
           return state.map(t =>
             t.id === task.id ? { ...t, ...task } : t

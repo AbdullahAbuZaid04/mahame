@@ -1,22 +1,21 @@
 'use client'
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { addTask } from "../actions";
 import { toast } from "sonner";
 
 export default function AddTaskForm({ addOptimistic }) {
-  const [state, formAction] = useActionState(addTask, null)
 
-  useEffect(() => {
-    if (state?.success) {
-      toast.success(state.message, { id: "add-task" });
-    } else if (state) {
-      toast.error(state.message, { id: "add-task" });
-    }
-  }, [state]);
+  const formRef = useRef(null);
+
+
 
   async function handleSubmit(formData) {
     const title = formData.get('title')
+    if (!title.trim()) return;
+
+    formRef.current?.reset();
+
     addOptimistic({
       type: 'add',
       task: {
@@ -28,13 +27,25 @@ export default function AddTaskForm({ addOptimistic }) {
         user_id: 'optimistic'
       }
     })
-    formAction(formData)
+    
+    try {
+      const result = await addTask(null, formData)
+      if (result?.success) {
+        toast.success(result.message);
+      } else {
+        toast.error(result?.message || "حدث خطأ أثناء الإضافة");
+      }
+    } catch (e) {
+      toast.error("فشل الاتصال بالسيرفر");
+    }
   }
 
   return (
     <section className="mb-10">
-      <form action={handleSubmit} className="flex flex-col sm:flex-row gap-3 bg-slate-800 p-3 rounded-2xl border border-slate-700 shadow-lg focus-within:border-blue-500 transition-colors">
+      <form ref={formRef} action={handleSubmit} className="flex flex-col sm:flex-row gap-3 bg-slate-800 p-3 rounded-2xl border border-slate-700 shadow-lg focus-within:border-blue-500 transition-colors">
+        <label htmlFor="task-title" className="sr-only">عنوان المهمة الجديدة</label>
         <input
+          id="task-title"
           name="title" type="text" required
           placeholder="ما الذي تنوي إنجازه اليوم؟"
           aria-label="عنوان المهمة الجديدة"

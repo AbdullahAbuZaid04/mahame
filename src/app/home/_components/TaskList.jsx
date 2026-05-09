@@ -8,15 +8,15 @@ import TaskProgress from "./TaskProgress";
 export default function TaskList({ tasks, filter, addOptimistic }) {
   return (
     <section>
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start lg:items-center gap-4 mb-6">
         <div className="flex items-center gap-3">
           <h2 className="text-2xl font-bold text-white">قائمة المهام</h2>
-          <span className="bg-slate-700 text-slate-300 text-xs px-2 py-1 rounded-full">
+          <span className="bg-slate-700 text-white text-xs px-2 py-1 rounded-full">
             {tasks.length}
           </span>
         </div>
-        <div className="w-full md:w-auto">
-          <Suspense fallback={<div className="h-10 w-64 bg-slate-800 rounded-xl animate-pulse"></div>}>
+        <div className="w-full sm:w-1/2 flex justify-end">
+          <Suspense fallback={<div className="h-10 w-full bg-slate-800 rounded-xl animate-pulse"></div>}>
             <Tabs />
           </Suspense>
         </div>

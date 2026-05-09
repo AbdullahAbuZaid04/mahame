@@ -10,7 +10,7 @@ export default async function Header() {
             مرحبًا بك: <span className="text-blue-400">{user?.user_metadata?.display_name || "مستخدم"}</span> 👋
           </h1>
         </div>
-        <p className="text-slate-500 text-xs my-1 truncate">البريد المسجل حاليًا: {user?.email}</p>
+        <p className="text-slate-400 text-xs my-1 truncate">البريد المسجل حاليًا: {user?.email}</p>
       </div>
       <form action={signOut} className="shrink-0 w-full sm:w-auto">
         <button type="submit" className="w-full sm:w-auto bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white px-4 py-2 rounded-xl transition-all duration-200 border border-red-500/20 active:scale-95 text-sm font-medium">

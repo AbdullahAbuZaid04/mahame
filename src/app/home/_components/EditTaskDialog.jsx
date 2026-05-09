@@ -12,12 +12,9 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { PenLine } from "lucide-react";
 
 export default function EditTaskDialog({ task, addOptimistic }) {
-  const [state, formAction] = useActionState(updateTask, null)
 
-  useEffect(() => {
-    if (state?.success) toast.success(state.message, { id: `edit-${task.id}` });
-    else if (state?.success === false) toast.error(state.message, { id: `edit-${task.id}` });
-  }, [state, task.id]);
+
+
 
   async function handleSubmit(formData) {
     addOptimistic({
@@ -27,13 +24,23 @@ export default function EditTaskDialog({ task, addOptimistic }) {
         title: formData.get('title')
       }
     })
-    formAction(formData)
+    
+    try {
+      const result = await updateTask(null, formData)
+      if (result?.success) {
+        toast.success(result.message);
+      } else {
+        toast.error(result?.message || "حدث خطأ أثناء التعديل");
+      }
+    } catch (e) {
+      toast.error("فشل الاتصال بالسيرفر");
+    }
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button title="تعديل المهمة" className="p-2 rounded-lg transition-all active:scale-90 hover:bg-blue-500/10">
+        <button title="تعديل المهمة" aria-label="تعديل المهمة" className="p-2 rounded-lg transition-all active:scale-90 hover:bg-blue-500/10">
           <PenLine size={20} className='text-blue-500' />
         </button>
       </DialogTrigger>
