@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# منصة مهامي - Mahame Platform
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase)
 
-First, run the development server:
+**منصة مهامي** هي تطبيق ويب عصري لإدارة المهام الشخصية، مصمم ليوفر تجربة مستخدم سلسة، سريعة، وجميلة. يهدف التطبيق إلى مساعدتك في تنظيم جدولك اليومي وزيادة إنتاجيتك من خلال واجهة مستخدم بسيطة وقوية في آن واحد.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## المميزات الرئيسية
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **إدارة المهام كاملة (CRUD)**: إضافة، تعديل، حذف، وتغيير حالة المهام بسهولة.
+- **نظام توثيق متكامل (Authentication)**: نظام آمن بالكامل لتسجيل الدخول وإنشاء الحسابات واستعادة كلمة المرور باستخدام **Supabase Auth**.
+- **تعريب شامل (Full Arabic Support)**: واجهة مستخدم عربية بالكامل مع رسائل أخطاء مخصصة وواضحة.
+- **خصوصية البيانات (Security)**: جميع المهام محمية بواسطة **Row Level Security (RLS)**، حيث لا يمكن لأي مستخدم الوصول إلا لمهامه الخاصة فقط.
+- **تحديثات فورية (Optimistic UI)**: تجربة مستخدم فائقة السرعة حيث تظهر التعديلات والإشعارات فوراً.
+- **نظام فلترة ذكي**: عرض المهام (الكل، المكتملة، غير المكتملة) بضغطة زر.
+- **مؤشر إنجاز تفاعلي**: شريط تقدم يوضح نسبة إنجازك لمهامك اليومية.
+- **تصميم عصري (Premium Dark UI)**: واجهة مستخدم مريحة للعين تعتمد على أحدث صيحات التصميم.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## التقنيات المستخدمة
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
+- **UI Components**: [Shadcn/ui](https://ui.shadcn.com/) & [Radix UI](https://www.radix-ui.com/)
+- **Database & Auth**: [Supabase](https://supabase.com/)
+- **Notifications**: [Sonner](https://sonner.stevenly.me/)
 
-## Learn More
+## التشغيل المحلي
 
-To learn more about Next.js, take a look at the following resources:
+1. **نسخ المستودع**:
+   ```bash
+   git clone https://github.com/AbdullahAbuZaid04/mahame.git
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **تثبيت المكتبات**:
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **إعداد متغيرات البيئة**:
+   قم بإنشاء ملف `.env.local` وأضف البيانات التالية:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+   NEXT_PUBLIC_SITE_URL=your_site_url
+   ```
 
-## Deploy on Vercel
+4. **تشغيل المشروع**:
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ملاحظات هامة
+- تأكد من تفعيل **Email Confirmation** في إعدادات Supabase ليعمل نظام التسجيل بشكل صحيح.
+- عند النشر (Deployment)، قم بتغيير `NEXT_PUBLIC_SITE_URL` إلى رابط موقعك الحقيقي لتصل روابط استعادة كلمة المرور بشكل صحيح.
