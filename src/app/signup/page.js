@@ -75,7 +75,7 @@ export default function SignupPage() {
             </div>
           </form>
         </div>
-        <p className="text-center text-slate-500 mt-8 text-sm">جميع الحقوق محفوظة © {new Date().getFullYear()}</p>
+        <p className="text-center text-slate-500 mt-8 text-sm">جميع الحقوق محفوظة  © مهامي  {new Date().getFullYear()}</p>
       </div>
     </div>
   )
